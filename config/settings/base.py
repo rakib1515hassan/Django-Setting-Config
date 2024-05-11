@@ -42,7 +42,9 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 ## For Custom Apps Creat (apps/my_apps )
 CUSTOM_APPS = [
-    # 'apps.core.apps.CoreConfig',
+    'apps.core.apps.CoreConfig',
+    'apps.dashboards.apps.DashboardsConfig',
+    'apps.users.apps.UsersConfig',
 
 ]
 
@@ -54,7 +56,7 @@ THIRD_PARTY_APPS = [
     ## For Ckeditor
     # 'ckeditor', 
     # 'ckeditor_uploader',
-    # 'django_cleanup.apps.CleanupConfig',
+    'django_cleanup.apps.CleanupConfig',
 
 ]
 
@@ -87,9 +89,13 @@ MIDDLEWARE = [
 
 
 
+## For Custom User Model
+AUTH_USER_MODEL = 'users.User'
+swappable = 'AUTH_USER_MODEL'
+
+
 
 ROOT_URLCONF = 'config.urls'
-
 
 
 
@@ -98,7 +104,9 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            # os.path.join(BASE_DIR, 'apps/dashboards/templates'),
+            os.path.join(BASE_DIR, 'apps/dashboards/templates'),
+            os.path.join(BASE_DIR, 'apps/auth/templates'),
+            os.path.join(BASE_DIR, 'apps/admin/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -169,7 +177,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Dhaka'
 
 USE_I18N = True
 
@@ -202,6 +211,38 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
+REMEMBER_ME_EXPIRY = 60 * 60 * 24 * 30  # 30 days in seconds
+
+OTP_TIMEOUT = 3  ## OTP timeout set 3 minutes
+
+
+
+
+DEFAULT_PAGINATION_LIMIT = 2
+FORM_RENDERER = 'config.forms.CustomDivFormRenderer'
+
+
+
+## Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = env('EMAIL_HOST', default='localhost')
+EMAIL_PORT = env('EMAIL_PORT', default=25, cast=int)
+EMAIL_USE_TLS = env('EMAIL_USE_TLS', default=False, cast=bool)
+
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+
+
+
+
+## SMS Service Configuration (Message Send)
+SMS_PROVIDER = env('SMS_PROVIDER', default='')
+TWILIO_ACCOUNT_SID  = env('TWILIO_ACCOUNT_SID', default='')
+TWILIO_AUTH_TOKEN   = env('TWILIO_AUTH_TOKEN', default='')
+TWILIO_PHONE_NUMBER = env('TWILIO_PHONE_NUMBER', default='')
 
 
 
