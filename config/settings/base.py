@@ -225,25 +225,6 @@ FORM_RENDERER = 'config.forms.CustomDivFormRenderer'
 
 
 
-## Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-EMAIL_HOST = env('EMAIL_HOST', default='localhost')
-EMAIL_PORT = env('EMAIL_PORT', default=25, cast=int)
-EMAIL_USE_TLS = env('EMAIL_USE_TLS', default=False, cast=bool)
-
-EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
-
-
-
-
-## SMS Service Configuration (Message Send)
-SMS_PROVIDER = env('SMS_PROVIDER', default='')
-TWILIO_ACCOUNT_SID  = env('TWILIO_ACCOUNT_SID', default='')
-TWILIO_AUTH_TOKEN   = env('TWILIO_AUTH_TOKEN', default='')
-TWILIO_PHONE_NUMBER = env('TWILIO_PHONE_NUMBER', default='')
-
 
 
 ##================= Package ===================================

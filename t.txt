@@ -1,0 +1,8 @@
+socket = django_test_project
+
+
+
+pwd
+
+which geunicorn
+
